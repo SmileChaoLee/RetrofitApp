@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
         <variable
             name="viewModel"
             type="com.smile.retrofitapp.viewModels.LanguageViewModel" />
     </data>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
-        android:gravity="center"
-        android:weightSum="10">
+        android:background="@android:color/darker_gray">
         <TextView
+            android:id="@+id/idTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textScaleX="1.0"
@@ -22,37 +22,59 @@
             android:textColor="#ffff0e1d"
             android:textSize="20sp"
             android:text="@{Integer.toString(viewModel.language.id)}"
-            android:layout_weight="1">
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
         </TextView>
         <TextView
+            android:id="@+id/langNoTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textScaleX="1.0"
+            android:textStyle="bold"
             android:typeface="monospace"
-            android:textColor="#0e32ff"
+            android:textColor="#ffff0e1d"
             android:textSize="20sp"
             android:text="@{viewModel.language.langNo}"
-            android:layout_weight="1">
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/idTextView">
         </TextView>
         <TextView
+            android:id="@+id/langNaTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textScaleX="1.0"
+            android:textStyle="bold"
             android:typeface="monospace"
-            android:textColor="#0e32ff"
+            android:textColor="#ffff0e1d"
             android:textSize="20sp"
             android:text="@{viewModel.language.langNa}"
-            android:layout_weight="3">
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/langNoTextView">
         </TextView>
         <TextView
+            android:id="@+id/langEnTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textScaleX="1.0"
+            android:textStyle="bold"
             android:typeface="monospace"
-            android:textColor="#0e32ff"
+            android:textColor="#ffff0e1d"
             android:textSize="20sp"
             android:text="@{viewModel.language.langEn}"
-            android:layout_weight="5">
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/langNaTextView">
         </TextView>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
