@@ -5,14 +5,13 @@ import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.models.LanguageList
 import retrofit2.Callback
 
-abstract class RestApi<T> : Callback<T> {
+abstract class RestApiAsync<T> : Callback<T> {
     companion object {
-        private const val TAG = "RestApi"
+        private const val TAG = "RestApiAsync"
     }
 
     private val callback : Callback<T>
         get() {
-            Log.d(TAG, "callback.return $this")
             return this
         }
 

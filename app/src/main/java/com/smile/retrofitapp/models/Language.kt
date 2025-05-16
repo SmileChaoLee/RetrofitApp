@@ -7,10 +7,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Language(
     @SerializedName("id")
-    var id: Int = 0,
+    var id: Int? = 0,
     @SerializedName("langNo")
-    var langNo: String = "",
+    var langNo: String? = "",
     @SerializedName("langNa")
-    var langNa: String = "",
+    var langNa: String? = "",
     @SerializedName("langEn")
-    var langEn: String = ""): Parcelable
+    var langEn: String? = ""): Parcelable
