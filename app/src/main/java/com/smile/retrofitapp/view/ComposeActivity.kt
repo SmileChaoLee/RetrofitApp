@@ -60,6 +60,12 @@ class ComposeActivity : ComponentActivity() {
         // enableEdgeToEdge()
         setContent {
             TextView()
+            Button(onClick = {
+                languages.value = getAllLanguages(2)
+                Log.d(TAG, "Clicked")
+            },
+                modifier = Modifier.size(300.dp, 100.dp))
+            { Text(text="Update languages") }
         }
     }
 
@@ -108,12 +114,6 @@ class ComposeActivity : ComponentActivity() {
                 }
             }
         }
-        Button(onClick = {
-            languages.value = getAllLanguages(2)
-            Log.d(TAG, "Clicked")
-        },
-            modifier = Modifier.size(300.dp, 100.dp))
-        { Text(text="Increase counter") }
     }
 }
 
