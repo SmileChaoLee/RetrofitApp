@@ -18,7 +18,7 @@ public class HttpURLConnection {
         final String webUrl = BASE_URL + "comments";
         Log.d(TAG, "getComments.WebUrl = " + webUrl);
 
-        ArrayList<Comment> comments = new ArrayList();
+        ArrayList<Comment> comments = new ArrayList<>();
 
         URL url;
         java.net.HttpURLConnection myConnection = null;

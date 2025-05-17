@@ -5,7 +5,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smile.retrofitapp.dao.HttpURLConnection
 import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.retrofit2.RestApiSync
 import kotlinx.coroutines.Dispatchers

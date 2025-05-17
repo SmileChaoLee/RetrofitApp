@@ -12,13 +12,11 @@ class RestApiSync(private val url: String = "http://137.184.120.171/") {
     }
 
     // get Retrofit client and Retrofit Api
-    @Suppress("UNCHECKED_CAST")
     private val apiInterface : ApiInterface
         get() {
             return Client().getInstance(url).create(ApiInterface::class.java)
         }
 
-    @Suppress("UNCHECKED_CAST")
     fun getAllLanguages(): LanguageList {
         Log.d(TAG, "getAllLanguages")
         // get Call from Retrofit Api
@@ -32,7 +30,6 @@ class RestApiSync(private val url: String = "http://137.184.120.171/") {
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
     fun getLanguageId(id: Int): Language {
         // get Call from Retrofit Api
         try {
