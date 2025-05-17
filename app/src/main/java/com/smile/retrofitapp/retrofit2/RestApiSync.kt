@@ -1,11 +1,12 @@
 package com.smile.retrofitapp.retrofit2
 
 import android.util.Log
+import com.smile.retrofitapp.models.Comment
 import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.models.LanguageList
 import retrofit2.Response
 
-class RestApiSync {
+class RestApiSync(private val url: String = "http://137.184.120.171/") {
     companion object {
         private const val TAG = "RestApiSync"
     }
@@ -14,7 +15,7 @@ class RestApiSync {
     @Suppress("UNCHECKED_CAST")
     private val apiInterface : ApiInterface
         get() {
-            return Client.instance.create(ApiInterface::class.java)
+            return Client().getInstance(url).create(ApiInterface::class.java)
         }
 
     @Suppress("UNCHECKED_CAST")
@@ -23,7 +24,7 @@ class RestApiSync {
         // get Call from Retrofit Api
         try {
             val response: Response<LanguageList> = apiInterface.getAllLanguages().execute()
-            return response?.body() ?: LanguageList()
+            return response.body() ?: LanguageList()
         } catch (ex: Exception) {
             Log.d(TAG, "getAllLanguages().Exception")
             ex.printStackTrace()
@@ -36,11 +37,24 @@ class RestApiSync {
         // get Call from Retrofit Api
         try {
             val response: Response<Language> = apiInterface.getLanguageById(id).execute()
-            return response?.body() ?: Language()
+            return response.body() ?: Language()
         } catch (ex: Exception) {
             Log.d(TAG, "getLanguageId().Exception")
             ex.printStackTrace()
             return Language()
+        }
+    }
+
+    fun getComments(): ArrayList<Comment> {
+        Log.d(TAG, "getComments")
+        // get Call from Retrofit Api
+        try {
+            val response: Response<ArrayList<Comment>> = apiInterface.getComments().execute()
+            return response.body() ?: ArrayList()
+        } catch (ex: Exception) {
+            Log.d(TAG, "getComments().Exception")
+            ex.printStackTrace()
+            return ArrayList()
         }
     }
 }

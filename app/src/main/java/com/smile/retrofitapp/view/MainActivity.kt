@@ -33,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         init {
             Log.d(TAG, "MyRestApiAsync.created")
         }
+
+        override fun getUrl(): String {
+            return "http://137.184.120.171/"
+        }
+
         override fun onResponse(call: Call<LanguageList>, response: Response<LanguageList>) {
             Log.d(TAG, "MyRestApiAsync.onResponse")
             var languageList: LanguageList? = null

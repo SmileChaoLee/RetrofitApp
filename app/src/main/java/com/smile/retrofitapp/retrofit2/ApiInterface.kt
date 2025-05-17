@@ -1,5 +1,6 @@
 package com.smile.retrofitapp.retrofit2
 
+import com.smile.retrofitapp.models.Comment
 import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.models.LanguageList
 import retrofit2.Call
@@ -12,4 +13,7 @@ interface ApiInterface {
 
     @GET("api/Languages/{id}")
     fun getLanguageById(@Path("id") id: Int): Call<Language>
+
+    @GET("comments")
+    fun getComments(): Call<ArrayList<Comment>>
 }
