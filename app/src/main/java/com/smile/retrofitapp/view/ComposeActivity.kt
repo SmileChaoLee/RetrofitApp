@@ -6,12 +6,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -95,27 +97,36 @@ class ComposeActivity : ComponentActivity() {
     @Composable
     fun DisplayLanguages(languages: ArrayList<Language>, modifier: Modifier) {
         Log.d(TAG, "DisplayLanguages.languages.size = ${languages.size}")
-        LazyColumn(modifier = modifier.background(color = androidx.compose.ui.graphics.Color.LightGray)) {
+        LazyColumn(modifier = modifier
+            .background(color = androidx.compose.ui.graphics.Color.LightGray)) {
             items(languages) { language ->
-                Log.d(TAG, "DisplayLanguages.LazyColumn.Row")
-                val textModifier = Modifier.padding(start = 10.dp, end = 0.dp)
-                Row (modifier = Modifier.padding(all = 2.dp)) {
-                    Log.d(TAG, "DisplayLanguages.LazyColumn.Row.language.id = " +
-                            "${language.id}")
+                val textModifier = Modifier.padding(start = 2.dp, end = 0.dp)
+                val textHeight = 25.dp
+                Row (modifier = Modifier.fillMaxSize()) {
                     language.id?.toString()?.let {
-                        Text(text = it.padStart(5, ' '),
-                            modifier = textModifier, fontFamily = FontFamily.Monospace,
+                        Text(text = it.padStart(3, ' '),
+                            modifier = textModifier.size(width = 40.dp, height = textHeight),
+                            fontFamily = FontFamily.Monospace,
                             color = androidx.compose.ui.graphics.Color.Red)
                     }
-                    Text(text = language.langNo ?: "", modifier = textModifier,
+                    Text(
+                        text = language.langNo ?: "",
+                        modifier = textModifier.size(width = 40.dp, height = textHeight),
                         fontFamily = FontFamily.Monospace,
-                        color = androidx.compose.ui.graphics.Color.Red)
-                    Text(text = language.langNa ?: "", modifier = textModifier,
+                        color = androidx.compose.ui.graphics.Color.Red
+                    )
+                    Text(
+                        text = language.langNa ?: "",
+                        modifier = textModifier.size(width = 100.dp, height = textHeight),
                         fontFamily = FontFamily.Monospace,
-                        color = androidx.compose.ui.graphics.Color.Red)
-                    Text(text = language.langEn ?: "", modifier = textModifier,
+                        color = androidx.compose.ui.graphics.Color.Red
+                    )
+                    Text(
+                        text = language.langEn ?: "",
+                        modifier = textModifier.size(width = 200.dp, height = textHeight),
                         fontFamily = FontFamily.Monospace,
-                        color = androidx.compose.ui.graphics.Color.Red)
+                        color = androidx.compose.ui.graphics.Color.Red
+                    )
                 }
             }
         }
