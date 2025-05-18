@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smile.retrofitapp.Constants
 import com.smile.retrofitapp.databinding.ActivityMainBinding
 import com.smile.retrofitapp.models.LanguageList
-import com.smile.retrofitapp.retrofit2.RestApiAsync
+import com.smile.retrofitapp.retrofit.RestApiAsync
 import com.smile.retrofitapp.adapters.LanguageListAdapter
 import retrofit2.Call
 import retrofit2.Response

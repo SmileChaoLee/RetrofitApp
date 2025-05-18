@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.retrofit2
+package com.smile.retrofitapp.retrofit
 
 import com.smile.retrofitapp.models.Comment
 import com.smile.retrofitapp.models.Language
