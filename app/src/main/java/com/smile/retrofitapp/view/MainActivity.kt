@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "MyRestApiAsync.created")
         }
 
-        override fun getUrl(): String {
+        override fun getWebUrl(): String {
             return Constants.CHAO_URL
         }
 

@@ -11,7 +11,7 @@ abstract class RestApiAsync<T> : Callback<T> {
         private const val TAG = "RestApiAsync"
     }
 
-    abstract fun getUrl(): String
+    abstract fun getWebUrl(): String
 
     private val callback : Callback<T>
         get() {
@@ -19,7 +19,7 @@ abstract class RestApiAsync<T> : Callback<T> {
         }
     // get Retrofit client and Retrofit Api
     private val apiInterface : ApiInterface
-        get() = Client().getInstance(getUrl()).create(ApiInterface::class.java)
+        get() = Client.getInstance(getWebUrl()).create(ApiInterface::class.java)
 
     @Suppress("UNCHECKED_CAST")
     fun getAllLanguages() {

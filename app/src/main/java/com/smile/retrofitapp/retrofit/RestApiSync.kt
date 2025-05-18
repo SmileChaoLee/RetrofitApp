@@ -1,7 +1,6 @@
 package com.smile.retrofitapp.retrofit
 
 import android.util.Log
-import com.smile.retrofitapp.Constants
 import com.smile.retrofitapp.models.Comment
 import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.models.LanguageList
@@ -13,23 +12,23 @@ object RestApiSync {
 
     // get Retrofit client and Retrofit Api
     private val apiInstanceMap: HashMap<String, ApiInterface> = HashMap()
-    private fun getApiInstance(url: String): ApiInterface {
+    private fun getApiInstance(webUrl: String): ApiInterface {
         val apiInstance: ApiInterface
-        if (apiInstanceMap.contains(url)) {
-            apiInstance = apiInstanceMap.getValue(url)
+        if (apiInstanceMap.contains(webUrl)) {
+            apiInstance = apiInstanceMap.getValue(webUrl)
         } else {
-            apiInstance = Client().getInstance(url).create(ApiInterface::class.java)
-            apiInstanceMap[url] = apiInstance
+            apiInstance = Client.getInstance(webUrl).create(ApiInterface::class.java)
+            apiInstanceMap[webUrl] = apiInstance
         }
         Log.d(TAG, "getApiInstance = $apiInstance")
         return apiInstance
     }
 
-    fun getAllLanguages(url: String = Constants.CHAO_URL): LanguageList {
+    fun getAllLanguages(webUrl: String): LanguageList {
         Log.d(TAG, "getAllLanguages")
         // get Call from Retrofit Api
         try {
-            val response: Response<LanguageList> = getApiInstance(url)
+            val response: Response<LanguageList> = getApiInstance(webUrl)
                 .getAllLanguages().execute()
             return response.body() ?: LanguageList()
         } catch (ex: Exception) {
@@ -39,10 +38,10 @@ object RestApiSync {
         }
     }
 
-    fun getLanguageId(id: Int, url: String = Constants.CHAO_URL): Language {
+    fun getLanguageId(id: Int, webUrl: String): Language {
         // get Call from Retrofit Api
         try {
-            val response: Response<Language> = getApiInstance(url)
+            val response: Response<Language> = getApiInstance(webUrl)
                 .getLanguageById(id).execute()
             return response.body() ?: Language()
         } catch (ex: Exception) {
@@ -52,11 +51,11 @@ object RestApiSync {
         }
     }
 
-    fun getComments(url: String = Constants.COMMENTS_URL): ArrayList<Comment> {
+    fun getComments(webUrl: String): ArrayList<Comment> {
         Log.d(TAG, "getComments")
         // get Call from Retrofit Api
         try {
-            val response: Response<ArrayList<Comment>> = getApiInstance(url)
+            val response: Response<ArrayList<Comment>> = getApiInstance(webUrl)
                 .getComments().execute()
             return response.body() ?: ArrayList()
         } catch (ex: Exception) {
