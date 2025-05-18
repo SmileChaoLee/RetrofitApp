@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.smile.retrofitapp.Constants
 import com.smile.retrofitapp.databinding.ActivityMainBinding
 import com.smile.retrofitapp.models.LanguageList
 import com.smile.retrofitapp.retrofit2.RestApiAsync
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getUrl(): String {
-            return "http://137.184.120.171/"
+            return Constants.CHAO_URL
         }
 
         override fun onResponse(call: Call<LanguageList>, response: Response<LanguageList>) {

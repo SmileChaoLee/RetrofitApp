@@ -1,6 +1,7 @@
 package com.smile.retrofitapp.retrofit2
 
 import android.util.Log
+import com.smile.retrofitapp.models.Comment
 import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.models.LanguageList
 import retrofit2.Callback
@@ -31,5 +32,12 @@ abstract class RestApiAsync<T> : Callback<T> {
     fun getLanguageId(id: Int) {
         // get Call from Retrofit Api
         apiInterface.getLanguageById(id).enqueue(callback as Callback<Language>)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    fun getComments() {
+        Log.d(TAG, "getComments")
+        // get Call from Retrofit Api
+        apiInterface.getComments().enqueue(callback as Callback<ArrayList<Comment>>)
     }
 }

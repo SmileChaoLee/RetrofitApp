@@ -15,7 +15,6 @@ class LanguagesVewModel: ViewModel() {
         private const val TAG = "LanguagesVewModel"
     }
 
-    private val restApiSync = RestApiSync()
     private val _languages = mutableStateOf(ArrayList<Language>())
     val languages: MutableState<ArrayList<Language>>
         get() = _languages
@@ -27,10 +26,10 @@ class LanguagesVewModel: ViewModel() {
     fun loadData() {
         Log.d(TAG, "loadData")
         viewModelScope.launch(Dispatchers.IO) {
-            _languages.value = restApiSync.getAllLanguages().languages
-            val comments = RestApiSync("https://jsonplaceholder.typicode.com/").getComments()
-            Log.d(TAG, "loadData.comments = $comments")
+            _languages.value = RestApiSync.getAllLanguages().languages
+            val comments = RestApiSync.getComments()
             // val comments = HttpURLConnection.getComments()
+            // Log.d(TAG, "loadData.comments = $comments")
             Log.d(TAG, "loadData.comments.size = ${comments.size}")
         }
     }
