@@ -3,7 +3,6 @@ package com.smile.retrofitapp.viewmodels
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.unit.Constraints
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.smile.retrofitapp.Constants
