@@ -16,11 +16,11 @@ class LanguagesVewModel: ViewModel() {
         private const val TAG = "LanguagesVewModel"
     }
 
-    private val _languages = mutableStateOf(ArrayList<Language>())
-    val languages: MutableState<ArrayList<Language>>
+    private val _languages = mutableStateOf(listOf<Language>())
+    val languages: MutableState<List<Language>>
         get() = _languages
 
-    fun setLanguages(languages: ArrayList<Language>) {
+    fun setLanguages(languages: List<Language>) {
         _languages.value = languages
     }
 

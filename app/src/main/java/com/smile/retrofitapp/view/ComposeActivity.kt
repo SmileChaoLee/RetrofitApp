@@ -17,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
@@ -66,7 +67,7 @@ class ComposeActivity : ComponentActivity() {
     }
 
     @Composable
-    fun CreateView( languages: ArrayList<Language>) {
+    fun CreateView( languages: List<Language>) {
         Log.d(TAG, "CreateView")
         val columnVertical = 30.dp
         val buttonWidth = 200.dp
@@ -93,7 +94,7 @@ class ComposeActivity : ComponentActivity() {
         }
     }
     @Composable
-    fun DisplayLanguages(languages: ArrayList<Language>, modifier: Modifier) {
+    fun DisplayLanguages(languages: List<Language>, modifier: Modifier) {
         Log.d(TAG, "DisplayLanguages.languages.size = ${languages.size}")
         LazyColumn(modifier = modifier
             .background(color = androidx.compose.ui.graphics.Color.LightGray)) {
