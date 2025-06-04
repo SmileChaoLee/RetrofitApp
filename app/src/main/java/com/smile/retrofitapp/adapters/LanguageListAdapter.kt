@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.smile.retrofitapp.databinding.ItemLayoutBinding
 import com.smile.retrofitapp.models.Language
-import com.smile.retrofitapp.view.ui.theme.xml_view.viewModels.LangXmlViewModel
+import com.smile.retrofitapp.view.xml_view.viewModels.LangXmlViewModel
 
 class LanguageListAdapter(private val cycleOwner: LifecycleOwner,
     private val languages: ArrayList<Language>)

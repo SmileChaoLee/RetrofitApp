@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.ui.theme.compose
+package com.smile.retrofitapp.view.compose
 
 import android.os.Bundle
 import android.util.Log
@@ -32,9 +32,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.smile.retrofitapp.models.Language
-import com.smile.retrofitapp.view.ui.theme.RetrofitAppTheme
-import com.smile.retrofitapp.view.ui.theme.compose.viewmodels.MainComposeVewModel
+import com.smile.retrofitapp.view.compose.ui.theme.RetrofitAppTheme
+import com.smile.retrofitapp.view.compose.viewmodels.MainComposeVewModel
 
 private const val TAG = "ComposeActivity"
 

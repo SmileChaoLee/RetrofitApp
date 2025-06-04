@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.ui.theme
+package com.smile.retrofitapp.view.compose.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

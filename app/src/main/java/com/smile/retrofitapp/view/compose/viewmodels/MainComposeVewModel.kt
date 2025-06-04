@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.ui.theme.compose.viewmodels
+package com.smile.retrofitapp.view.compose.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import com.smile.retrofitapp.models.Comment
 import com.smile.retrofitapp.models.Constants
 import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.retrofit.RestApiSync
-import com.smile.retrofitapp.view.ui.theme.compose.UserIntents
+import com.smile.retrofitapp.view.compose.UserIntents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

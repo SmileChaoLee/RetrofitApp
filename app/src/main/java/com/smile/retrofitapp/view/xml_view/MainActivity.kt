@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.ui.theme.xml_view
+package com.smile.retrofitapp.view.xml_view
 
 import android.os.Bundle
 import android.util.Log

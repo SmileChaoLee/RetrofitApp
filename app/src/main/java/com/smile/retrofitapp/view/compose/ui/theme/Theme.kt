@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.ui.theme
+package com.smile.retrofitapp.view.compose.ui.theme
 
 import android.app.Activity
 import android.os.Build
