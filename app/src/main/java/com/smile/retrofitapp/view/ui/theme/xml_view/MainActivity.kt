@@ -1,11 +1,11 @@
-package com.smile.retrofitapp.view
+package com.smile.retrofitapp.view.ui.theme.xml_view
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.smile.retrofitapp.Constants
+import com.smile.retrofitapp.models.Constants
 import com.smile.retrofitapp.databinding.ActivityMainBinding
 import com.smile.retrofitapp.models.LanguageList
 import com.smile.retrofitapp.retrofit.RestApiAsync

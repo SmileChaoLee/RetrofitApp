@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view
+package com.smile.retrofitapp.view.ui.theme.compose
 
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +20,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,14 +34,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.view.ui.theme.RetrofitAppTheme
-import com.smile.retrofitapp.viewmodels.LanguagesVewModel
+import com.smile.retrofitapp.view.ui.theme.compose.viewmodels.MainComposeVewModel
 
 private const val TAG = "ComposeActivity"
 
 class ComposeActivity : ComponentActivity() {
 
-    private val viewModel: LanguagesVewModel by viewModels()
-    private var counter = 0
+    private val viewModel: MainComposeVewModel by viewModels()
 
     private var defaultFontSize = 20.sp
 
@@ -44,43 +48,37 @@ class ComposeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate.setContent()")
         setContent {
-            // Loading data
-            /*
+            // Screen View
             LaunchedEffect(Unit) {
-                Log.d(TAG, "onCreate.LaunchedEffect")
-                withContext(Dispatchers.IO) {
-                    languages.value = RestApiUtils.getAllLanguages().languages
-                    Log.d(TAG, "onCreateLaunchedEffect.languages.size = " +
-                            "${languages.value.size}")
-                }
+                viewModel.userIntent(UserIntents.Languages)
             }
-            */
-            LaunchedEffect(Unit) {
-                viewModel.loadData()
-            }
-            DisplayLanguages(viewModel.languages.value)
+            DisplayLanguages()
+            //
         }
-    }
-
-    private fun getAllLanguages(start: Int): ArrayList<Language> {
-        val languages = ArrayList<Language>().apply {
-            for (i in start..100) {
-                val ch = (i+65).toChar().toString()
-                add(Language(i, "$i", ch, ch))
-            }
-        }
-        return languages
     }
 
     @Composable
-    fun DisplayLanguages(languages: List<Language>) {
-        Log.d(TAG, "DisplayLanguages.languages.size = ${languages.size}")
+    fun DisplayLanguages() {
+        Log.d(TAG, "DisplayLanguages")
         val textFontSize = (defaultFontSize.value * 1f).sp
         Column(modifier = Modifier.fillMaxSize()
             .background(color = Color(0xff90e5c4))) {
             Text(text = "Languages List", fontSize = textFontSize, color = Color.Blue)
-            HorizontalDivider(color = Color.Black,
-                modifier = Modifier.fillMaxWidth().size(10.dp))
+            HorizontalDivider(color = Color.Black, thickness = 3.dp,
+                modifier = Modifier.fillMaxWidth())
+
+            var intent by remember { mutableStateOf(UserIntents.Languages) }
+            // will re-composite the following UI when intent changes
+            viewModel.userIntent(intent)
+
+            // when state changes for MutableState
+            // val languages = viewModel.languages.value
+
+            // when state changes for MutableStateFlow
+            val languages by viewModel.languages.collectAsState(listOf())
+            Log.d(TAG, "DisplayLanguages.languages.size = " +
+                    "${languages.size}")
+
             Log.d(TAG, "DisplayLanguages.LazyColumn")
             LazyColumn(modifier = Modifier.weight(1f)) {
                 items(languages) { language->
@@ -120,13 +118,12 @@ class ComposeActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally
                 , verticalArrangement = Arrangement.Center) {
                 Button(onClick = {
-                    if (counter % 2 == 0) {
-                        viewModel.setLanguages(getAllLanguages(1))
-                    } else {
-                        viewModel.loadData()
-                    }
-                    counter++
-                    Log.d(TAG, "DisplayLanguages.Button.Clicked.counter = $counter")
+                    intent = if (intent == UserIntents.Languages)
+                        UserIntents.GenerateLanguages
+                    else
+                        UserIntents.Languages
+                    Log.d(TAG, "DisplayLanguages.Button.Clicked.intent = $intent")
+                    // viewModel.userIntent(intent)
                 }, colors = ButtonColors(containerColor = Color.Cyan,
                     disabledContainerColor = Color.DarkGray,
                     contentColor = Color.Red,

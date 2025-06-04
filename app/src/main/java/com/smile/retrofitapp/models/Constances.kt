@@ -1,4 +1,4 @@
-package com.smile.retrofitapp
+package com.smile.retrofitapp.models
 
 object Constants {
     const val CHAO_URL = "http://137.184.120.171/"
