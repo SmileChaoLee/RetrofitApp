@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">RetrofitApp</string>
-    <string name="title_activity_compose">ComposeActivity</string>
+    <string name="title_activity_compose">ComposeRetrofitApp</string>
 </resources>

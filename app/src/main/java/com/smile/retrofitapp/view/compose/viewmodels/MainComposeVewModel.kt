@@ -21,9 +21,15 @@ class MainComposeVewModel: ViewModel() {
     // View state
     private val _languages = MutableStateFlow(listOf<Language>())
     val languages: StateFlow<List<Language>> = _languages
+    fun setLanguages(languages: List<Language>) {
+        _languages.value = languages
+    }
 
     private val _comments = MutableStateFlow(listOf<Comment>())
     val comments: StateFlow<List<Comment>> = _comments
+    fun setComments(comments: List<Comment>) {
+        _comments.value = comments
+    }
     //
 
     fun userIntent(intent: UserIntents) {
