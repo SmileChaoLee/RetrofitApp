@@ -31,6 +31,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.smile.retrofitapp.view.compose.uiLayer.CommentViewState
+import com.smile.retrofitapp.view.compose.uiLayer.LanguageViewState
+import com.smile.retrofitapp.view.compose.uiLayer.UserIntents
 import com.smile.retrofitapp.view.compose.ui.theme.RetrofitAppTheme
 import com.smile.retrofitapp.view.compose.viewmodels.MainComposeVewModel
 
@@ -54,7 +57,7 @@ class ComposeActivity : ComponentActivity() {
                 , verticalArrangement = Arrangement.Center) {
 
                 var intent by rememberSaveable { mutableStateOf(UserIntents.Languages) }
-                viewModel.userIntent(intent)
+                viewModel.handleIntent(intent)
                 // will re-composite the following UI when intent changes
 
                 // begin setting button
@@ -64,15 +67,15 @@ class ComposeActivity : ComponentActivity() {
                     onClick = {
                         intent = when(intent) {
                             UserIntents.Languages -> {
-                                viewModel.setLanguages(emptyList())
+                                viewModel.setLanguageState(LanguageViewState())
                                 UserIntents.GenerateLanguages
                             }
                             UserIntents.GenerateLanguages -> {
-                                viewModel.setLanguages(emptyList())
+                                viewModel.setLanguageState(LanguageViewState())
                                 UserIntents.Comments
                             }
                             UserIntents.Comments -> {
-                                viewModel.setComments(emptyList())
+                                viewModel.setCommentState(CommentViewState())
                                 UserIntents.Languages
                             }
                         }
@@ -103,21 +106,23 @@ class ComposeActivity : ComponentActivity() {
         Log.d(TAG, "DisplayLanguages")
         Column(modifier = modifier.fillMaxHeight().fillMaxWidth()
             .background(color = Color(0xff90e5c4))) {
-            Text(text = "Languages List", fontSize = textFontSize, color = Color.Blue)
-            HorizontalDivider(color = Color.Black, thickness = 3.dp,
-                modifier = Modifier.fillMaxWidth())
-            Log.d(TAG, "DisplayLanguages.LazyColumn")
-
             // when state changes for MutableState
             // val languages = viewModel.languages.value
             // when state changes for MutableStateFlow
-            val languages by viewModel.languages.collectAsState(listOf())
-            Log.d(TAG, "DisplayLanguages.languages.size = " +
-                    "${languages.size}")
-            if (languages.isEmpty()) return
 
+            val languageState by viewModel.languageState.collectAsState(LanguageViewState())
+            Log.d(TAG, "DisplayLanguages.languageState.sizeOfList = " +
+                    "${languageState.sizeOfList}")
+
+            Text(text = languageState.listTitle, fontSize = textFontSize, color = Color.Blue)
+            HorizontalDivider(color = Color.Black, thickness = 3.dp,
+                modifier = Modifier.fillMaxWidth())
+
+            if (languageState.sizeOfList == 0) return
+
+            Log.d(TAG, "DisplayLanguages.LazyColumn")
             LazyColumn(modifier = Modifier.weight(1f)) {
-                items(languages) { language->
+                items(languageState.languages) { language->
                     Row(modifier = Modifier.fillMaxWidth()) {
                         language.id?.toString()?.let {
                             Text(text = it.padStart(3, ' '),
@@ -154,21 +159,21 @@ class ComposeActivity : ComponentActivity() {
         Log.d(TAG, "DisplayComments")
         Column(modifier = modifier.fillMaxHeight().fillMaxWidth()
             .background(color = Color(0xff90e5c4))) {
-            Text(text = "Comments List", fontSize = textFontSize, color = Color.Blue)
-            HorizontalDivider(color = Color.Black, thickness = 3.dp,
-                modifier = Modifier.fillMaxWidth())
-
-            Log.d(TAG, "DisplayComments.LazyColumn")
             // when state changes for MutableState
             // val languages = viewModel.languages.value
             // when state changes for MutableStateFlow
-            val comments by viewModel.comments.collectAsState(listOf())
-            Log.d(TAG, "DisplayComments.comments.size = " +
-                    "${comments.size}")
-            if (comments.isEmpty()) return
+            val commentState by viewModel.commentState.collectAsState(CommentViewState())
+            Log.d(TAG, "DisplayComments.commentState.sizeOfList = " +
+                    "${commentState.sizeOfList}")
 
+            Text(text = commentState.listTitle, fontSize = textFontSize, color = Color.Blue)
+            HorizontalDivider(color = Color.Black, thickness = 3.dp,
+                modifier = Modifier.fillMaxWidth())
+            if (commentState.sizeOfList == 0) return
+
+            Log.d(TAG, "DisplayComments.LazyColumn")
             LazyColumn(modifier = Modifier.weight(1f)) {
-                items(comments) { comment->
+                items(commentState.comments) { comment->
                     Row(modifier = Modifier.fillMaxWidth()) {
                         comment.postId?.toString()?.let {
                             Text(text = it.padStart(3, ' '),

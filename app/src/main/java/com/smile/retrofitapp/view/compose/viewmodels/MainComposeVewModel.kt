@@ -3,11 +3,12 @@ package com.smile.retrofitapp.view.compose.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smile.retrofitapp.models.Comment
 import com.smile.retrofitapp.models.Constants
 import com.smile.retrofitapp.models.Language
 import com.smile.retrofitapp.retrofit.RestApiSync
-import com.smile.retrofitapp.view.compose.UserIntents
+import com.smile.retrofitapp.view.compose.uiLayer.CommentViewState
+import com.smile.retrofitapp.view.compose.uiLayer.LanguageViewState
+import com.smile.retrofitapp.view.compose.uiLayer.UserIntents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,20 +20,20 @@ class MainComposeVewModel: ViewModel() {
     }
 
     // View state
-    private val _languages = MutableStateFlow(listOf<Language>())
-    val languages: StateFlow<List<Language>> = _languages
-    fun setLanguages(languages: List<Language>) {
-        _languages.value = languages
+    private val _languageState = MutableStateFlow(LanguageViewState())
+    val languageState: StateFlow<LanguageViewState> = _languageState
+    fun setLanguageState(state: LanguageViewState) {
+        _languageState.value = state
     }
 
-    private val _comments = MutableStateFlow(listOf<Comment>())
-    val comments: StateFlow<List<Comment>> = _comments
-    fun setComments(comments: List<Comment>) {
-        _comments.value = comments
+    private val _commentState = MutableStateFlow(CommentViewState())
+    val commentState: StateFlow<CommentViewState> = _commentState
+    fun setCommentState(state: CommentViewState) {
+        _commentState.value = state
     }
     //
 
-    fun userIntent(intent: UserIntents) {
+    fun handleIntent(intent: UserIntents) {
         when (intent) {
             UserIntents.Languages -> {
                 loadLanguages()
@@ -49,8 +50,10 @@ class MainComposeVewModel: ViewModel() {
     private fun loadLanguages() {
         Log.d(TAG, "loadLanguages")
         viewModelScope.launch(Dispatchers.IO) {
-            _languages.value = RestApiSync.getAllLanguages(Constants.CHAO_URL).languages
-            Log.d(TAG, "loadLanguages.languages.size = ${_languages.value.size}")
+            val languages = RestApiSync.getAllLanguages(Constants.CHAO_URL).languages
+            Log.d(TAG, "loadLanguages.languages.size = ${languages.size}")
+            _languageState.value = LanguageViewState(
+                languages = languages, sizeOfList = languages.size)
         }
     }
 
@@ -62,15 +65,18 @@ class MainComposeVewModel: ViewModel() {
                 add(Language(i, "$i", ch, ch))
             }
         }
-        _languages.value = languages
+        _languageState.value = LanguageViewState(
+            languages = languages, sizeOfList = languages.size)
     }
 
     private fun loadComments() {
         Log.d(TAG, "loadComments")
         viewModelScope.launch(Dispatchers.IO) {
             // val comments = HttpURLConnection.getComments()
-            _comments.value = RestApiSync.getComments(Constants.COMMENTS_URL)
-            Log.d(TAG, "loadComments.comments.size = ${_comments.value.size}")
+            val comments = RestApiSync.getComments(Constants.COMMENTS_URL)
+            Log.d(TAG, "loadComments.comments.size = ${comments.size}")
+            _commentState.value = CommentViewState(
+                comments = comments, sizeOfList = comments.size)
         }
     }
 }

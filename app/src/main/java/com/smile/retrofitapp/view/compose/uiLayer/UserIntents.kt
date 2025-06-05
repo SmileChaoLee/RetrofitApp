@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.compose
+package com.smile.retrofitapp.view.compose.uiLayer
 
 enum class UserIntents {
     Languages,
