@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -19,6 +20,7 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,75 +53,79 @@ class ComposeActivity : ComponentActivity() {
         Log.d(TAG, "onCreate.setContent()")
         setContent {
             // Screen View
+            Log.d(TAG, "onCreate.setContent().Column")
             Column(modifier = Modifier.fillMaxSize()
                 .background(color = Color.Blue),
                 horizontalAlignment = Alignment.CenterHorizontally
                 , verticalArrangement = Arrangement.Center) {
 
-                var intent by rememberSaveable { mutableStateOf(UserIntents.Languages) }
-                viewModel.handleIntent(intent)
-                // will re-composite the following UI when intent changes
+                Log.d(TAG, "onCreate.setContent().Column.Box")
+                Box(modifier = Modifier.weight(9.0f)) {
+                    DisplayLanguages()
+                    DisplayComments()
+                }
 
                 // begin setting button
-                Log.d(TAG, "Column.Button")
-                Button(
-                    modifier = Modifier.weight(1.0f),
-                    onClick = {
-                        intent = when(intent) {
-                            UserIntents.Languages -> {
-                                viewModel.setLanguageState(LanguageViewState())
-                                UserIntents.GenerateLanguages
-                            }
-                            UserIntents.GenerateLanguages -> {
-                                viewModel.setLanguageState(LanguageViewState())
-                                UserIntents.Comments
-                            }
-                            UserIntents.Comments -> {
-                                viewModel.setCommentState(CommentViewState())
-                                UserIntents.Languages
-                            }
-                        }
-                        Log.d(TAG, "Column.Button.Clicked.intent = $intent")
-                              },
-                    colors = ButtonColors(containerColor = Color.Cyan,
-                    disabledContainerColor = Color.DarkGray,
-                    contentColor = Color.Red,
-                    disabledContentColor = Color.LightGray)
-                ) { Text(text = "Update Data",
-                    fontSize = textFontSize) }
-                // end of button setting
-                // HorizontalDivider(color = Color.Blue,
-                //     modifier = Modifier.weight(1.0f).fillMaxWidth().size(5.dp))
-
-                when(intent) {
-                    UserIntents.Languages -> DisplayLanguages(Modifier.weight(9.0f))
-                    UserIntents.GenerateLanguages -> DisplayLanguages(Modifier.weight(9.0f))
-                    UserIntents.Comments -> DisplayComments(Modifier.weight(9.0f))
-                }
+                Log.d(TAG, "onCreate.setContent().Column.UpdateButton")
+                UpdateButton(modifier = Modifier.weight(1.0f))
             }
             //
         }
     }
 
     @Composable
-    fun DisplayLanguages(modifier: Modifier) {
+    fun UpdateButton(modifier: Modifier = Modifier) {
+        Log.d(TAG, "UpdateButton")
+        Column(modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally
+            , verticalArrangement = Arrangement.Center) {
+
+            var uIntent by rememberSaveable { mutableStateOf(UserIntents.Languages) }
+            viewModel.handleIntent(uIntent)
+            Button(
+                onClick = {
+                    uIntent = when(uIntent) {
+                        UserIntents.Languages -> {
+                            viewModel.setLanguageState(LanguageViewState())
+                            UserIntents.GenerateLanguages
+                        }
+                        UserIntents.GenerateLanguages -> {
+                            viewModel.setLanguageState(LanguageViewState())
+                            UserIntents.Comments
+                        }
+                        UserIntents.Comments -> {
+                            viewModel.setCommentState(CommentViewState())
+                            UserIntents.Languages
+                        }
+                    }
+                    Log.d(TAG, "UpdateButton.Button.Clicked.uIntent = $uIntent")
+                },
+                colors = ButtonColors(containerColor = Color.Cyan,
+                    disabledContainerColor = Color.DarkGray,
+                    contentColor = Color.Red,
+                    disabledContentColor = Color.LightGray)
+            ) { Text(text = "Update Data",
+                fontSize = textFontSize) }
+        }
+    }
+
+    @Composable
+    fun DisplayLanguages() {
         Log.d(TAG, "DisplayLanguages")
-        Column(modifier = modifier.fillMaxHeight().fillMaxWidth()
+
+        // when state changes for MutableState
+        // val languages = viewModel.languages.value
+        // when state changes for MutableStateFlow
+        val languageState by viewModel.languageState.collectAsState(LanguageViewState())
+        Log.d(TAG, "DisplayLanguages.languageState.sizeOfList = " +
+                "${languageState.sizeOfList}")
+        if (languageState.sizeOfList == 0) return
+
+        Column(modifier = Modifier.fillMaxHeight().fillMaxWidth()
             .background(color = Color(0xff90e5c4))) {
-            // when state changes for MutableState
-            // val languages = viewModel.languages.value
-            // when state changes for MutableStateFlow
-
-            val languageState by viewModel.languageState.collectAsState(LanguageViewState())
-            Log.d(TAG, "DisplayLanguages.languageState.sizeOfList = " +
-                    "${languageState.sizeOfList}")
-
             Text(text = languageState.listTitle, fontSize = textFontSize, color = Color.Blue)
             HorizontalDivider(color = Color.Black, thickness = 3.dp,
                 modifier = Modifier.fillMaxWidth())
-
-            if (languageState.sizeOfList == 0) return
-
             Log.d(TAG, "DisplayLanguages.LazyColumn")
             LazyColumn(modifier = Modifier.weight(1f)) {
                 items(languageState.languages) { language->
@@ -155,22 +161,22 @@ class ComposeActivity : ComponentActivity() {
     }
 
     @Composable
-    fun DisplayComments(modifier: Modifier) {
+    fun DisplayComments() {
         Log.d(TAG, "DisplayComments")
-        Column(modifier = modifier.fillMaxHeight().fillMaxWidth()
-            .background(color = Color(0xff90e5c4))) {
-            // when state changes for MutableState
-            // val languages = viewModel.languages.value
-            // when state changes for MutableStateFlow
-            val commentState by viewModel.commentState.collectAsState(CommentViewState())
-            Log.d(TAG, "DisplayComments.commentState.sizeOfList = " +
-                    "${commentState.sizeOfList}")
 
+        // when state changes for MutableState
+        // val languages = viewModel.languages.value
+        // when state changes for MutableStateFlow
+        val commentState by viewModel.commentState.collectAsState(CommentViewState())
+        Log.d(TAG, "DisplayComments.commentState.sizeOfList = " +
+                "${commentState.sizeOfList}")
+        if (commentState.sizeOfList == 0) return
+
+        Column(modifier = Modifier.fillMaxHeight().fillMaxWidth()
+            .background(color = Color(0xff90e5c4))) {
             Text(text = commentState.listTitle, fontSize = textFontSize, color = Color.Blue)
             HorizontalDivider(color = Color.Black, thickness = 3.dp,
                 modifier = Modifier.fillMaxWidth())
-            if (commentState.sizeOfList == 0) return
-
             Log.d(TAG, "DisplayComments.LazyColumn")
             LazyColumn(modifier = Modifier.weight(1f)) {
                 items(commentState.comments) { comment->
