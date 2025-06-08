@@ -22,13 +22,13 @@ class MainComposeVewModel: ViewModel() {
     // View state
     private val _languageState = MutableStateFlow(LanguageViewState())
     val languageState: StateFlow<LanguageViewState> = _languageState
-    fun setLanguageState(state: LanguageViewState) {
+    private fun setLanguageState(state: LanguageViewState) {
         _languageState.value = state
     }
 
     private val _commentState = MutableStateFlow(CommentViewState())
     val commentState: StateFlow<CommentViewState> = _commentState
-    fun setCommentState(state: CommentViewState) {
+    private fun setCommentState(state: CommentViewState) {
         _commentState.value = state
     }
     //
@@ -43,6 +43,20 @@ class MainComposeVewModel: ViewModel() {
             }
             UserIntents.Comments -> {
                 loadComments()
+            }
+        }
+    }
+
+    fun releaseIntent(intent: UserIntents) {
+        when (intent) {
+            UserIntents.Languages -> {
+                setLanguageState(LanguageViewState())
+            }
+            UserIntents.GenerateLanguages -> {
+                setLanguageState(LanguageViewState())
+            }
+            UserIntents.Comments -> {
+                setCommentState(CommentViewState())
             }
         }
     }
