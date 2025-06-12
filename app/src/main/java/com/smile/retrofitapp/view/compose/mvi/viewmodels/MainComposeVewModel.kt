@@ -38,6 +38,23 @@ class MainComposeVewModel: ViewModel() {
     }
     //
 
+    private val _intent = MutableStateFlow(UserIntents.Languages)
+    val intent: StateFlow<UserIntents> = _intent.asStateFlow()
+
+    fun updateIntent(uIntent: UserIntents) {
+        _intent.value = when(uIntent) {
+            UserIntents.Languages -> {
+                UserIntents.GenerateLanguages
+            }
+            UserIntents.GenerateLanguages -> {
+                UserIntents.Comments
+            }
+            UserIntents.Comments -> {
+                UserIntents.Languages
+            }
+        }
+    }
+
     fun handleIntent(intent: UserIntents) {
         when (intent) {
             UserIntents.Languages -> {
