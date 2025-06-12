@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.dao;
+package com.smile.retrofitapp.data.dao;
 
 import android.util.Log;
 import org.json.JSONArray;
@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import com.smile.retrofitapp.models.Comment;
+import com.smile.retrofitapp.data.models.Comment;
 
 public class HttpURLConnection {
     private static final String TAG = "HttpURLConnection";

@@ -1,6 +1,6 @@
-package com.smile.retrofitapp.view.compose.uiLayer
+package com.smile.retrofitapp.view.compose.mvi.uiLayer
 
-import com.smile.retrofitapp.models.Language
+import com.smile.retrofitapp.data.models.Language
 
 data class LanguageViewState(
     val listTitle: String = "Languages List",

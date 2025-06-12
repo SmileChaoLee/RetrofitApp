@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.compose
+package com.smile.retrofitapp.view.compose.mvi
 
 import android.os.Bundle
 import android.util.Log
@@ -32,11 +32,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.smile.retrofitapp.view.compose.uiLayer.CommentViewState
-import com.smile.retrofitapp.view.compose.uiLayer.LanguageViewState
-import com.smile.retrofitapp.view.compose.uiLayer.UserIntents
+import com.smile.retrofitapp.view.compose.mvi.uiLayer.UserIntents
 import com.smile.retrofitapp.view.compose.ui.theme.RetrofitAppTheme
-import com.smile.retrofitapp.view.compose.viewmodels.MainComposeVewModel
+import com.smile.retrofitapp.view.compose.mvi.viewmodels.MainComposeVewModel
 
 private const val TAG = "ComposeActivity"
 
@@ -79,7 +77,7 @@ class ComposeActivity : ComponentActivity() {
             horizontalAlignment = Alignment.CenterHorizontally
             , verticalArrangement = Arrangement.Center) {
 
-            var uIntent by rememberSaveable { mutableStateOf(UserIntents.Languages) }
+            var uIntent: UserIntents by rememberSaveable { mutableStateOf(UserIntents.Languages) }
             viewModel.handleIntent(uIntent)
             Button(
                 onClick = {
@@ -113,8 +111,9 @@ class ComposeActivity : ComponentActivity() {
         // when state changes for MutableState
         // val languages = viewModel.languages.value
         // when state changes for MutableStateFlow
-        val languageState by viewModel.languageState.collectAsState(LanguageViewState())
-        Log.d(TAG, "DisplayLanguages.languageState.sizeOfList = " +
+        val languageState by viewModel.languageState.collectAsState()
+        Log.d(
+            TAG, "DisplayLanguages.languageState.sizeOfList = " +
                 "${languageState.sizeOfList}")
         if (languageState.sizeOfList == 0) return
 
@@ -164,8 +163,9 @@ class ComposeActivity : ComponentActivity() {
         // when state changes for MutableState
         // val languages = viewModel.languages.value
         // when state changes for MutableStateFlow
-        val commentState by viewModel.commentState.collectAsState(CommentViewState())
-        Log.d(TAG, "DisplayComments.commentState.sizeOfList = " +
+        val commentState by viewModel.commentState.collectAsState()
+        Log.d(
+            TAG, "DisplayComments.commentState.sizeOfList = " +
                 "${commentState.sizeOfList}")
         if (commentState.sizeOfList == 0) return
 

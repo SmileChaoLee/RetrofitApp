@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.models
+package com.smile.retrofitapp.data.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

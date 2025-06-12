@@ -1,9 +1,9 @@
-package com.smile.retrofitapp.retrofit
+package com.smile.retrofitapp.data.retrofit
 
 import android.util.Log
-import com.smile.retrofitapp.models.Comment
-import com.smile.retrofitapp.models.Language
-import com.smile.retrofitapp.models.LanguageList
+import com.smile.retrofitapp.data.models.Comment
+import com.smile.retrofitapp.data.models.Language
+import com.smile.retrofitapp.data.models.LanguageList
 import retrofit2.Callback
 
 abstract class RestApiAsync<T> : Callback<T> {

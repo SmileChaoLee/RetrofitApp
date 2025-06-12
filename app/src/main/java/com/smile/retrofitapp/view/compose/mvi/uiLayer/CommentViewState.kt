@@ -1,6 +1,6 @@
-package com.smile.retrofitapp.view.compose.uiLayer
+package com.smile.retrofitapp.view.compose.mvi.uiLayer
 
-import com.smile.retrofitapp.models.Comment
+import com.smile.retrofitapp.data.models.Comment
 
 data class CommentViewState(
     val listTitle: String = "Comments List",

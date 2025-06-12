@@ -3,7 +3,7 @@ package com.smile.retrofitapp.view.xml_view.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.smile.retrofitapp.models.Language
+import com.smile.retrofitapp.data.models.Language
 
 class LangXmlViewModel: ViewModel() {
     private val _language: MutableLiveData<Language> = MutableLiveData()

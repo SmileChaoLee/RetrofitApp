@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.adapters
+package com.smile.retrofitapp.view.xml_view.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.smile.retrofitapp.databinding.ItemLayoutBinding
-import com.smile.retrofitapp.models.Language
+import com.smile.retrofitapp.data.models.Language
 import com.smile.retrofitapp.view.xml_view.viewModels.LangXmlViewModel
 
 class LanguageListAdapter(private val cycleOwner: LifecycleOwner,

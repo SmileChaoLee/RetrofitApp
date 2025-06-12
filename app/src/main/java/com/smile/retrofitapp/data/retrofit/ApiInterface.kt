@@ -1,8 +1,8 @@
-package com.smile.retrofitapp.retrofit
+package com.smile.retrofitapp.data.retrofit
 
-import com.smile.retrofitapp.models.Comment
-import com.smile.retrofitapp.models.Language
-import com.smile.retrofitapp.models.LanguageList
+import com.smile.retrofitapp.data.models.Comment
+import com.smile.retrofitapp.data.models.Language
+import com.smile.retrofitapp.data.models.LanguageList
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

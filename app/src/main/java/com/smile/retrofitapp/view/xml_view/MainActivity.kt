@@ -5,11 +5,11 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.smile.retrofitapp.models.Constants
+import com.smile.retrofitapp.data.models.Constants
 import com.smile.retrofitapp.databinding.ActivityMainBinding
-import com.smile.retrofitapp.models.LanguageList
-import com.smile.retrofitapp.retrofit.RestApiAsync
-import com.smile.retrofitapp.adapters.LanguageListAdapter
+import com.smile.retrofitapp.data.models.LanguageList
+import com.smile.retrofitapp.data.retrofit.RestApiAsync
+import com.smile.retrofitapp.view.xml_view.adapters.LanguageListAdapter
 import retrofit2.Call
 import retrofit2.Response
 

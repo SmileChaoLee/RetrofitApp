@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.retrofit
+package com.smile.retrofitapp.data.retrofit
 
 import android.util.Log
 import com.google.gson.GsonBuilder
