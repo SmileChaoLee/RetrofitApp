@@ -24,6 +24,13 @@ class MainComposeVewModel: ViewModel() {
         private const val TAG = "MainComposeVewModel"
     }
 
+    // getGenLanguageUseCase can be injected
+    private val getGenLanguageUseCase = GetGenLanguageUseCase(GenLanguageRepositoryImpl())
+    // getLanguageUseCase can be injected
+    private val getLanguageUseCase = GetLanguageUseCase(LanguageRepositoryImpl())
+    // getCommentUseCase can be injected
+    private val getCommentUseCase = GetCommentUseCase(CommentRepositoryImpl())
+
     // View state
     private val _languageState = MutableStateFlow(LanguageViewState())
     val languageState: StateFlow<LanguageViewState> = _languageState.asStateFlow()
@@ -86,8 +93,6 @@ class MainComposeVewModel: ViewModel() {
     private fun loadLanguages() {
         Log.d(TAG, "loadLanguages")
         viewModelScope.launch(Dispatchers.IO) {
-            // getLanguageUseCase can be injected
-            val getLanguageUseCase = GetLanguageUseCase(LanguageRepositoryImpl())
             val languages = getLanguageUseCase()
             // val languages = RestApiSync.getAllLanguages(Constants.CHAO_URL).languages
             Log.d(TAG, "loadLanguages.languages.size = ${languages.size}")
@@ -112,8 +117,6 @@ class MainComposeVewModel: ViewModel() {
         }
         */
         viewModelScope.launch(Dispatchers.Default) {
-            // getGenLanguageUseCase can be injected
-            val getGenLanguageUseCase = GetGenLanguageUseCase(GenLanguageRepositoryImpl())
             val languages = getGenLanguageUseCase()
             _languageState.update {
                 it.copy(languages = languages, sizeOfList = languages.size)
@@ -130,8 +133,6 @@ class MainComposeVewModel: ViewModel() {
         Log.d(TAG, "loadComments")
         viewModelScope.launch(Dispatchers.IO) {
             // val comments = RestApiSync.getComments(Constants.COMMENTS_URL)
-            // getCommentUseCase can be injected
-            val getCommentUseCase = GetCommentUseCase(CommentRepositoryImpl())
             val comments = getCommentUseCase()
             Log.d(TAG, "loadComments.comments.size = ${comments.size}")
             _commentState.update {
