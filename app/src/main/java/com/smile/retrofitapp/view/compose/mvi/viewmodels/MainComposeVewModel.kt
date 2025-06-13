@@ -38,7 +38,7 @@ class MainComposeVewModel: ViewModel() {
     }
     //
 
-    private val _intent = MutableStateFlow(UserIntents.Languages)
+    private val _intent = MutableStateFlow<UserIntents>(UserIntents.Languages)
     val intent: StateFlow<UserIntents> = _intent.asStateFlow()
 
     fun updateIntent(uIntent: UserIntents) {
