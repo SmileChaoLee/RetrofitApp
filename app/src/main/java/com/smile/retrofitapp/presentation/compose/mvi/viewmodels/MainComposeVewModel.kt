@@ -43,13 +43,12 @@ class MainComposeVewModel: ViewModel() {
     private fun setCommentState(state: CommentViewState) {
         _commentState.value = state
     }
-    //
 
     private val _intent = MutableStateFlow<UserIntents>(UserIntents.Languages)
     val intent: StateFlow<UserIntents> = _intent.asStateFlow()
 
-    fun updateIntent(uIntent: UserIntents) {
-        _intent.value = when(uIntent) {
+    fun updateIntent(intent: UserIntents) {
+        _intent.value = when(intent) {
             UserIntents.Languages -> {
                 UserIntents.GenerateLanguages
             }
@@ -57,6 +56,12 @@ class MainComposeVewModel: ViewModel() {
                 UserIntents.Comments
             }
             UserIntents.Comments -> {
+                UserIntents.Languages
+            }
+            UserIntents.Tasks -> {
+                UserIntents.Languages
+            }
+            is UserIntents.TaskWork -> {
                 UserIntents.Languages
             }
         }
@@ -73,6 +78,10 @@ class MainComposeVewModel: ViewModel() {
             UserIntents.Comments -> {
                 loadComments()
             }
+            UserIntents.Tasks -> {
+            }
+            is UserIntents.TaskWork -> {
+            }
         }
     }
 
@@ -87,6 +96,8 @@ class MainComposeVewModel: ViewModel() {
             UserIntents.Comments -> {
                 setCommentState(CommentViewState())
             }
+            UserIntents.Tasks -> {}
+            is UserIntents.TaskWork -> {}
         }
     }
 

@@ -18,18 +18,25 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.smile.retrofitapp.presentation.compose.ui.theme.RetrofitAppTheme
+import com.smile.retrofitapp.domain.model.Task
+import com.smile.retrofitapp.presentation.compose.mvi.MainActivity.ButtonClickListener
+import com.smile.retrofitapp.presentation.compose.mvi.uiLayer.UserIntents
 import com.smile.retrofitapp.presentation.compose.mvi.viewmodels.MainComposeVewModel
 
 private const val TAG = "ComposeActivity"
@@ -47,10 +54,12 @@ class ComposeActivity : ComponentActivity() {
         setContent {
             // Screen View
             Log.d(TAG, "onCreate.setContent().Column")
-            Column(modifier = Modifier.fillMaxSize()
-                .background(color = Color.Blue),
-                horizontalAlignment = Alignment.CenterHorizontally
-                , verticalArrangement = Arrangement.Center) {
+            Column(
+                modifier = Modifier.fillMaxSize()
+                    .background(color = Color.Blue),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
 
                 Log.d(TAG, "onCreate.setContent().Column.Box")
                 Box(modifier = Modifier.weight(9.0f)) {
@@ -198,21 +207,5 @@ class ComposeActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RetrofitAppTheme {
-        Greeting("Android")
     }
 }
