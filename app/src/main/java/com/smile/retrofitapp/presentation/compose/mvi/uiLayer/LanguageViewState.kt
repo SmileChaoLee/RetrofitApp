@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.compose.mvi.uiLayer
+package com.smile.retrofitapp.presentation.compose.mvi.uiLayer
 
 import com.smile.retrofitapp.data.models.Language
 

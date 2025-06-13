@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.xml_view.viewModels
+package com.smile.retrofitapp.presentation.xml_view.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

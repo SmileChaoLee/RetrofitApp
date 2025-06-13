@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.compose.mvi.viewmodels
+package com.smile.retrofitapp.presentation.compose.mvi.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -9,9 +9,9 @@ import com.smile.retrofitapp.data.repositoryImpl.LanguageRepositoryImpl
 import com.smile.retrofitapp.domain.usecase.GetCommentUseCase
 import com.smile.retrofitapp.domain.usecase.GetGenLanguageUseCase
 import com.smile.retrofitapp.domain.usecase.GetLanguageUseCase
-import com.smile.retrofitapp.view.compose.mvi.uiLayer.CommentViewState
-import com.smile.retrofitapp.view.compose.mvi.uiLayer.LanguageViewState
-import com.smile.retrofitapp.view.compose.mvi.uiLayer.UserIntents
+import com.smile.retrofitapp.presentation.compose.mvi.uiLayer.CommentViewState
+import com.smile.retrofitapp.presentation.compose.mvi.uiLayer.LanguageViewState
+import com.smile.retrofitapp.presentation.compose.mvi.uiLayer.UserIntents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

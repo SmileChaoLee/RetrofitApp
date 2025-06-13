@@ -1,6 +1,5 @@
-package com.smile.retrofitapp.view.compose.ui.theme
+package com.smile.retrofitapp.presentation.compose.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

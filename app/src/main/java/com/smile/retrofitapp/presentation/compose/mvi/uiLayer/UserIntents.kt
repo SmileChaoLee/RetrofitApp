@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.compose.mvi.uiLayer
+package com.smile.retrofitapp.presentation.compose.mvi.uiLayer
 
 sealed class UserIntents {
     data object Languages : UserIntents()

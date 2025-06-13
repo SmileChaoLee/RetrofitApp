@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.compose.ui.theme
+package com.smile.retrofitapp.presentation.compose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

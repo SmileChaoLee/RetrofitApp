@@ -1,4 +1,4 @@
-package com.smile.retrofitapp.view.xml_view
+package com.smile.retrofitapp.presentation.xml_view
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import com.smile.retrofitapp.data.models.Constants
 import com.smile.retrofitapp.databinding.ActivityMainBinding
 import com.smile.retrofitapp.data.models.LanguageList
 import com.smile.retrofitapp.data.retrofit.RestApiAsync
-import com.smile.retrofitapp.view.xml_view.adapters.LanguageListAdapter
+import com.smile.retrofitapp.presentation.xml_view.adapters.LanguageListAdapter
 import retrofit2.Call
 import retrofit2.Response
 
